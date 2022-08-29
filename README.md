@@ -16,7 +16,6 @@ $ git clone https://github.com/Mercenario-OFC/connect.git
 
 - pkg install pv -y
 - pkg install termux-tools -y
-- pkg install android-tools -y
 
 </details>
 
