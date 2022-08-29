@@ -11,7 +11,7 @@
 ```bash
 $ git clone https://github.com/Mercenario-OFC/connect.git
 ```
-<details>
+<details open>
   <summary><strong>Dependencies</strong></summary>
 
 - pkg install pv -y
