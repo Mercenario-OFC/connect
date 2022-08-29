@@ -11,6 +11,14 @@
 ```bash
 $ git clone https://github.com/Mercenario-OFC/connect.git
 ```
+<details>
+  <summary><strong>Dependencies</strong></summary>
+
+- pkg install pv -y
+- pkg install termux-tools -y
+- pkg install android-tools -y
+
+</details>
 
 ### form of use
 
