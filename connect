@@ -24,12 +24,14 @@ ctrl_c() {
 
 #================== (TESTE)
 #verifica se a variavel esta vazia
-if [ -z "$2" ]; then
+alert(){
+if [ "$2" = "" ]; then
     echo "Formas de uso:
   (./connect.sh -ip IP)
  " | pv -qL 10 && exit 1
-fi
 
+fi
+}
 #==================
 #variaveis
 
@@ -69,6 +71,6 @@ function help(){
 
  case ${1} in
      -ip|--ip) _connect;;
-     -d | d) "adb disconnect"
-       *) alertas
+     -d|--d) adb disconnect ;;
+       *) alert ;;
   esac
