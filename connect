@@ -1,0 +1,74 @@
+#!/usr/bin/env bash
+
+#==================
+# Verificando existencia de dependencias
+
+for x in 'adb' 'pv'; do
+    which "$x" &>/dev/null || { echo "${x} is required. ABORTED."; exit 1 ;}
+done
+
+#================== (teste)
+# Funçao de encerramento
+
+trap ctrl_c INT
+
+ctrl_c() {
+
+  clear ; printf "[+] (Ctrl + C ) Detectado, Tentativa de saida ...\n" ; sleep 2s
+   printf "\n[+] Encerrando serviços, Aguarde...\n"
+
+   printf '\n[+] Obrigado por usar este programa =).\n'
+    rm -rf .android
+      exit 1
+}
+
+#================== (TESTE)
+#verifica se a variavel esta vazia
+if [ -z "$2" ]; then
+    echo "Formas de uso:
+  (./connect.sh -ip IP)
+ " | pv -qL 10 && exit 1
+fi
+
+#==================
+#variaveis
+
+ip="${2}"
+port="5555"
+
+#==================
+#Cerebro do script
+
+function _connect(){
+
+while : ; do
+    OUTPUT="$(adb connect ${ip}:${port})"
+    if [[ $OUTPUT = *connected* ]]; then
+        echo "[!] SUCESSO!! Conectado a ${ip}:${port}"
+ echo "[+] pegando shell"
+sleep 1s
+	adb shell 2> /dev/null || adb devices
+        exit 1
+fi
+    echo "[*] Conectando..."
+    sleep .25
+done
+}
+
+#==================
+#Função ajuda
+
+function help(){
+
+ echo "Formas de uso:
+ (./connect.sh -ip IP)
+" | pv -qL 10; }
+
+#==================
+#Verificando parametro informado
+
+ case ${1} in
+     -ip|--ip) _connect;;
+     -d | d) "adb disconnect"
+       *) alertas
+  esac
