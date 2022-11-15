@@ -37,7 +37,7 @@ IP="${2}"
 PORT="5555"
 
 #==================
-#Cerebro so script
+#Cerebro do script
 
 function _connect(){
 
