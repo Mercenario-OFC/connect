@@ -24,29 +24,27 @@ ctrl_c() {
 
 #================== (TESTE)
 #verifica se a variavel esta vazia
-alert(){
-if [ "$2" = "" ]; then
+if [ -z "$2" ]; then
     echo "Formas de uso:
   (./connect.sh -ip IP)
  " | pv -qL 10 && exit 1
-
 fi
-}
+
 #==================
 #variaveis
 
-ip="${2}"
-port="5555"
+IP="${2}"
+PORT="5555"
 
 #==================
-#Cerebro do script
+#Cerebro so script
 
 function _connect(){
 
-while : ; do
-    OUTPUT="$(adb connect ${ip}:${port})"
+while true; do
+    OUTPUT="$(adb connect ${IP}:${PORT})"
     if [[ $OUTPUT = *connected* ]]; then
-        echo "[!] SUCESSO!! Conectado a ${ip}:${port}"
+        echo "[!] SUCESSO!! Conectado a ${IP}:${PORT}"
  echo "[+] pegando shell"
 sleep 1s
 	adb shell 2> /dev/null || adb devices
@@ -70,7 +68,7 @@ function help(){
 #Verificando parametro informado
 
  case ${1} in
-     -ip|--ip) _connect;;
-     -d|--d) adb disconnect ;;
-       *) alert ;;
+     "-ip"|"-IP") _connect;;
+       *) help
   esac
+  
